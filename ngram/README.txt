@@ -1,0 +1,1 @@
+python3 ngram.py texto.txt 2
