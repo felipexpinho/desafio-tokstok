@@ -1,14 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import lxml
 
-def busca(url):
+def busca_urls(url):
     lista_urls = []
     
-    html = requests.get(url).content
-    soup = BeautifulSoup(html, 'html.parser')
-    data = soup.find_all("script", type="application/ld+json", limit=1)
-    content = data[0].get_text()
+    content = tentativa(url)
     json_object = json.loads(content)
 
     lista_elementos = json_object["itemListElement"]
@@ -18,7 +16,16 @@ def busca(url):
         url_item = url_item.replace("/https://portal.vtexcommercestable.com.br", "")
         lista_urls.append(url_item)
 
-    print("Busca\n",lista_urls)
+    #print("Busca\n",lista_urls)
     return lista_urls
 
-busca("https://www.tokstok.com.br/moveis?")
+def tentativa(url):
+    html = requests.get(url).content
+    soup = BeautifulSoup(html, 'lxml')
+    try:
+        data = soup.find_all("script", type="application/ld+json")
+        content = data[0].get_text()
+        return content
+    except:
+        #print("Tentando novamente.")
+        return tentativa(url)
