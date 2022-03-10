@@ -1,3 +1,7 @@
+Bibliotecas utilizadas e como instalar:
+BeautifulSoup - pip install bs4
+lxml - pip install lxml
+
 Para rodar o sistema, execute o arquivo main.py.
 OBS.: Para rodar na linha de comando, utilize o comando "python3 main.py" (Podendo ser diferente de acordo com o Python instalado em sua máquina)
 
