@@ -25,6 +25,7 @@ def tentativa(url):
     try:
         data = soup.find_all("script", type="application/ld+json")
         content = data[0].get_text()
+        print(url,"acessada.")
         return content
     except:
         #print("Tentando novamente.")
